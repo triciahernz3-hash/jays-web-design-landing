@@ -39,7 +39,10 @@
     body {
       font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
         "Segoe UI", sans-serif;
-      background: #020617;
+      background:
+        radial-gradient(circle at top left, #1f2937, transparent 55%),
+        radial-gradient(circle at top right, #111827, transparent 55%),
+        radial-gradient(circle at bottom, #020617, #000000);
       color: var(--text);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
@@ -63,54 +66,42 @@
       overflow-x: hidden;
     }
 
+    /* BACKGROUND ORBS */
+    .bg-orb {
+      position: fixed;
+      border-radius: 999px;
+      filter: blur(40px);
+      opacity: 0.5;
+      z-index: -2;
+      pointer-events: none;
+    }
+    .bg-orb.orb-1 {
+      width: 380px;
+      height: 380px;
+      background: rgba(0, 198, 255, 0.42);
+      top: -80px;
+      left: -120px;
+    }
+    .bg-orb.orb-2 {
+      width: 320px;
+      height: 320px;
+      background: rgba(255, 75, 139, 0.34);
+      top: 60%;
+      right: -120px;
+    }
+    .bg-orb.orb-3 {
+      width: 260px;
+      height: 260px;
+      background: rgba(56, 189, 248, 0.3);
+      bottom: -90px;
+      left: 35%;
+    }
+
     .container {
       width: 100%;
       max-width: var(--max-width);
       margin: 0 auto;
       padding: 0 1.4rem;
-    }
-
-    /* ANIMATED BACKGROUND LAYERS */
-    .bg-gradient {
-      position: fixed;
-      inset: 0;
-      z-index: -3;
-      background: radial-gradient(circle at top left, #1f2937, transparent 55%),
-        radial-gradient(circle at top right, #111827, transparent 55%),
-        radial-gradient(circle at bottom, #020617, #000000);
-    }
-
-    .bg-hero-wave {
-      position: absolute;
-      inset: 0;
-      z-index: -2;
-      background: linear-gradient(
-        120deg,
-        rgba(0, 198, 255, 0.25),
-        rgba(255, 75, 139, 0.3),
-        rgba(56, 189, 248, 0.25)
-      );
-      mix-blend-mode: screen;
-      opacity: 0.55;
-      filter: blur(10px);
-      background-size: 200% 200%;
-      animation: heroGradient 18s ease-in-out infinite;
-      pointer-events: none;
-    }
-
-    @keyframes heroGradient {
-      0% {
-        transform: translate3d(0, 0, 0);
-        background-position: 0% 50%;
-      }
-      50% {
-        transform: translate3d(-10px, 10px, 0);
-        background-position: 100% 50%;
-      }
-      100% {
-        transform: translate3d(0, 0, 0);
-        background-position: 0% 50%;
-      }
     }
 
     /* NAVBAR */
@@ -145,12 +136,8 @@
       width: 42px;
       height: 42px;
       border-radius: 999px;
-      background: radial-gradient(
-        circle at 25% 25%,
-        #ffffff,
-        #00c6ff 35%,
-        #020617
-      );
+      background:
+        radial-gradient(circle at 25% 25%, #ffffff, #00c6ff 35%, #020617);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -300,21 +287,42 @@
       overflow: hidden;
     }
 
-    .hero::before {
-      content: "";
+    /* animated gradient hero background (no client images here) */
+    .hero-gradient {
+      position: absolute;
+      inset: -40%;
+      background: conic-gradient(
+        from 140deg,
+        #00c6ff,
+        #ff4b8b,
+        #6366f1,
+        #00c6ff
+      );
+      opacity: 0.32;
+      filter: blur(60px);
+      animation: spin 22s linear infinite;
+      z-index: -2;
+    }
+
+    .hero-overlay {
       position: absolute;
       inset: 0;
-      background: radial-gradient(
-        circle at top,
-        rgba(15, 23, 42, 0.3),
-        rgba(2, 6, 23, 0.95)
-      );
+      background: radial-gradient(circle at top, rgba(2, 6, 23, 0.7), #020617);
       z-index: -1;
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1.05fr);
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1.1fr);
       gap: 2.7rem;
       align-items: center;
     }
@@ -385,53 +393,73 @@
       font-weight: 500;
     }
 
-    /* rotating keywords under hero */
-    .hero-words {
-      margin-top: 0.7rem;
-      font-size: 0.8rem;
+    /* rotating word strip */
+    .hero-strip {
+      margin-top: 1.4rem;
+      font-size: 0.78rem;
       color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
     }
 
-    .hero-words span.dynamic {
-      display: inline-block;
-      min-width: 110px;
-      color: var(--accent-2);
-      font-weight: 600;
-      animation: rotateWords 9s linear infinite;
+    .hero-strip-label {
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.7rem;
+      color: #6b7280;
+    }
+
+    .hero-strip-words {
+      overflow: hidden;
+      height: 1.1rem;
+      position: relative;
+      width: 210px;
+    }
+
+    .hero-strip-words span {
+      position: absolute;
+      left: 0;
+      right: 0;
+      text-align: left;
+      animation: rotateWords 9s infinite;
+    }
+
+    .hero-strip-words span:nth-child(1) {
+      animation-delay: 0s;
+    }
+    .hero-strip-words span:nth-child(2) {
+      animation-delay: 3s;
+    }
+    .hero-strip-words span:nth-child(3) {
+      animation-delay: 6s;
     }
 
     @keyframes rotateWords {
-      0%, 16% { content: "websites"; }
-      17%, 33% { content: "logos"; }
-      34%, 50% { content: "SEO"; }
-      51%, 67% { content: "Google Ads"; }
-      68%, 84% { content: "landing pages"; }
-      85%, 100% { content: "brand vibes"; }
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      25% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      33% {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
     }
 
-    .hero-words span.dynamic::after {
-      content: "websites";
-      animation: dynamicText 10s linear infinite;
-    }
-
-    @keyframes dynamicText {
-      0%, 16% { content: "websites"; }
-      17%, 33% { content: "logos"; }
-      34%, 50% { content: "SEO"; }
-      51%, 67% { content: "Google Ads"; }
-      68%, 84% { content: "landing pages"; }
-      85%, 100% { content: "brand vibes"; }
-    }
-
-    /* HERO MOCKUP CARD */
+    /* HERO CARD */
     .hero-card {
       border-radius: var(--radius-xxl);
       padding: 1.3rem 1.4rem 1.4rem;
-      background: linear-gradient(
-        145deg,
-        rgba(15, 23, 42, 0.96),
-        rgba(2, 6, 23, 0.98)
-      );
+      background:
+        linear-gradient(145deg, rgba(15, 23, 42, 0.96), rgba(2, 6, 23, 0.98));
       box-shadow: var(--shadow-soft);
       border: 1px solid rgba(148, 163, 184, 0.28);
       position: relative;
@@ -443,19 +471,12 @@
       position: absolute;
       width: 180%;
       height: 180%;
-      background: radial-gradient(
-          circle at top right,
-          rgba(0, 198, 255, 0.25),
-          transparent 55%
-        ),
-        radial-gradient(
-          circle at bottom left,
-          rgba(255, 75, 139, 0.25),
-          transparent 55%
-        );
+      background:
+        radial-gradient(circle at top right, rgba(0, 198, 255, 0.25), transparent 55%),
+        radial-gradient(circle at bottom left, rgba(255, 75, 139, 0.25), transparent 55%);
       top: -40%;
       left: -20%;
-      opacity: 0.8;
+      opacity: 0.85;
       pointer-events: none;
     }
 
@@ -525,16 +546,9 @@
 
     .mockup-hero {
       border-radius: 12px;
-      background: radial-gradient(
-          circle at top left,
-          rgba(0, 198, 255, 0.38),
-          transparent 60%
-        ),
-        radial-gradient(
-          circle at bottom right,
-          rgba(255, 75, 139, 0.38),
-          transparent 60%
-        );
+      background:
+        radial-gradient(circle at top left, rgba(0, 198, 255, 0.38), transparent 60%),
+        radial-gradient(circle at bottom right, rgba(255, 75, 139, 0.38), transparent 60%);
       padding: 0.7rem;
       color: #0b1120;
       display: flex;
@@ -612,7 +626,7 @@
       font-size: 0.9rem;
     }
 
-    /* SECTION WRAPPER */
+    /* SECTION */
     section {
       padding: 2rem 0 2.3rem;
     }
@@ -660,11 +674,8 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: radial-gradient(
-        circle at top right,
-        rgba(0, 198, 255, 0.16),
-        transparent 60%
-      );
+      background:
+        radial-gradient(circle at top right, rgba(0, 198, 255, 0.16), transparent 60%);
       opacity: 0;
       transition: opacity 0.16s ease;
       pointer-events: none;
@@ -710,49 +721,43 @@
     }
 
     .project-card {
-      background: #020617;
+      background: radial-gradient(circle at top, #020617, #020617 45%, #000000);
       border-radius: var(--radius-xl);
+      padding: 0.9rem 0.95rem 0.95rem;
       border: 1px solid rgba(31, 41, 55, 0.96);
+      position: relative;
       overflow: hidden;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
       transition:
         transform 0.18s ease,
         box-shadow 0.18s ease,
-        border-color 0.18s ease;
-      display: flex;
-      flex-direction: column;
-      height: 100%;
+        border-color 0.18s ease,
+        background 0.18s ease;
     }
 
     .project-card:hover {
       transform: translateY(-4px) scale(1.01);
       box-shadow: var(--shadow-card);
       border-color: var(--accent);
+      background: radial-gradient(circle at top, #020617, #020617 35%, #020617);
     }
 
-    .project-image-wrap {
-      position: relative;
+    .project-thumb {
+      border-radius: 12px;
       overflow: hidden;
-      max-height: 180px;
+      margin-bottom: 0.6rem;
+      border: 1px solid rgba(15, 23, 42, 0.9);
     }
 
-    .project-image-wrap img {
+    .project-thumb img {
       width: 100%;
-      height: 100%;
+      height: 150px;
       object-fit: cover;
-      transition: transform 0.4s ease;
+      display: block;
+      transition: transform 0.2s ease;
     }
 
-    .project-card:hover .project-image-wrap img {
-      transform: scale(1.04);
-    }
-
-    .project-body {
-      padding: 0.8rem 0.9rem 0.95rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.35rem;
-      flex: 1;
+    .project-card:hover .project-thumb img {
+      transform: scale(1.03);
     }
 
     .project-topline {
@@ -760,6 +765,7 @@
       justify-content: space-between;
       align-items: center;
       gap: 0.5rem;
+      margin-bottom: 0.4rem;
     }
 
     .project-name {
@@ -775,16 +781,20 @@
     .project-url {
       font-size: 0.78rem;
       color: var(--muted);
+      margin-bottom: 0.55rem;
       word-break: break-all;
     }
 
     .project-meta {
-      margin-top: 0.35rem;
       font-size: 0.74rem;
       color: var(--muted);
       display: flex;
       justify-content: space-between;
       align-items: center;
+    }
+
+    .project-meta span.industry {
+      font-size: 0.7rem;
     }
 
     .project-meta span.cta {
@@ -801,16 +811,9 @@
     }
 
     .contact-card {
-      background: radial-gradient(
-          circle at top left,
-          rgba(0, 198, 255, 0.22),
-          transparent 55%
-        ),
-        radial-gradient(
-          circle at bottom right,
-          rgba(255, 75, 139, 0.2),
-          transparent 55%
-        ),
+      background:
+        radial-gradient(circle at top left, rgba(0, 198, 255, 0.22), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(255, 75, 139, 0.2), transparent 55%),
         #020617;
       border-radius: var(--radius-xxl);
       padding: 1.35rem 1.3rem 1.45rem;
@@ -974,126 +977,6 @@
       margin-top: 0.6rem;
     }
 
-    /* CHAT WIDGET */
-    .chat-widget {
-      position: fixed;
-      bottom: 20px;
-      right: 18px;
-      z-index: 60;
-      font-size: 14px;
-    }
-
-    .chat-bubble-btn {
-      width: 52px;
-      height: 52px;
-      border-radius: 999px;
-      border: none;
-      background: linear-gradient(135deg, var(--accent-2), var(--accent));
-      color: #020617;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.6rem;
-      box-shadow:
-        0 14px 34px rgba(0, 0, 0, 0.9),
-        0 0 18px rgba(0, 198, 255, 0.8);
-      cursor: pointer;
-      transition:
-        transform 0.16s ease,
-        box-shadow 0.16s ease,
-        filter 0.16s ease;
-    }
-
-    .chat-bubble-btn:hover {
-      transform: translateY(-2px) scale(1.03);
-      filter: brightness(1.05);
-    }
-
-    .chat-panel {
-      position: absolute;
-      right: 0;
-      bottom: 60px;
-      width: 270px;
-      border-radius: 18px;
-      background: rgba(15, 23, 42, 0.98);
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      box-shadow: var(--shadow-soft);
-      padding: 0.75rem 0.85rem 0.9rem;
-      opacity: 0;
-      transform: translateY(10px);
-      pointer-events: none;
-      transition:
-        opacity 0.18s ease,
-        transform 0.18s ease;
-    }
-
-    .chat-panel.open {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-
-    .chat-panel-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 0.4rem;
-      margin-bottom: 0.35rem;
-    }
-
-    .chat-panel-title {
-      font-size: 0.86rem;
-      font-weight: 600;
-    }
-
-    .chat-panel-badge {
-      font-size: 0.7rem;
-      color: var(--muted);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-    }
-
-    .chat-panel-badge span.dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: #22c55e;
-      box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
-    }
-
-    .chat-panel p {
-      font-size: 0.78rem;
-      color: var(--muted);
-      margin-bottom: 0.5rem;
-    }
-
-    .chat-panel a.sms-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      padding: 0.45rem 0.8rem;
-      border-radius: 999px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color: #020617;
-      font-size: 0.82rem;
-      font-weight: 600;
-      box-shadow:
-        0 12px 26px rgba(0, 0, 0, 0.9),
-        0 0 16px rgba(0, 198, 255, 0.7);
-    }
-
-    .chat-panel a.sms-btn span.icon {
-      margin-right: 0.35rem;
-    }
-
-    .chat-panel-footer {
-      margin-top: 0.35rem;
-      font-size: 0.7rem;
-      color: var(--muted);
-    }
-
     /* FOOTER */
     footer {
       border-top: 1px solid rgba(15, 23, 42, 0.95);
@@ -1120,6 +1003,130 @@
       color: var(--accent);
     }
 
+    /* FLOATING SMS CHAT WIDGET */
+    .chat-widget {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.6rem;
+      font-size: 0.8rem;
+    }
+
+    .chat-bubble {
+      width: 52px;
+      height: 52px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow:
+        0 16px 40px rgba(0, 0, 0, 0.9),
+        0 0 24px rgba(0, 198, 255, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #020617;
+      font-size: 1.2rem;
+    }
+
+    .chat-label {
+      background: rgba(15, 23, 42, 0.96);
+      border-radius: 999px;
+      padding: 0.35rem 0.8rem;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: var(--muted);
+      backdrop-filter: blur(8px);
+    }
+
+    .chat-panel {
+      width: 260px;
+      background: rgba(15, 23, 42, 0.98);
+      border-radius: 16px;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95);
+      overflow: hidden;
+      display: none;
+      flex-direction: column;
+    }
+
+    .chat-panel-header {
+      padding: 0.6rem 0.8rem;
+      background: radial-gradient(circle at top, #00c6ff33, transparent 60%);
+      border-bottom: 1px solid rgba(31, 41, 55, 0.9);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+    }
+
+    .chat-panel-header span.title {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chat-panel-header span.title strong {
+      font-size: 0.82rem;
+    }
+
+    .chat-panel-header span.title small {
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+
+    .chat-close {
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--muted);
+    }
+
+    .chat-panel-body {
+      padding: 0.7rem 0.8rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .chat-input-area {
+      padding: 0.6rem 0.8rem 0.7rem;
+      border-top: 1px solid rgba(31, 41, 55, 0.9);
+      display: grid;
+      gap: 0.4rem;
+    }
+
+    .chat-input-area textarea {
+      min-height: 60px;
+      resize: vertical;
+      border-radius: 10px;
+      border: 1px solid rgba(31, 41, 55, 0.98);
+      padding: 0.45rem 0.55rem;
+      background: rgba(15, 23, 42, 0.96);
+      color: var(--text);
+      font-size: 0.8rem;
+      outline: none;
+    }
+
+    .chat-input-area button {
+      border: none;
+      border-radius: 999px;
+      padding: 0.4rem 0.8rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #020617;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.75);
+    }
+
+    .chat-input-hint {
+      font-size: 0.7rem;
+      color: #6b7280;
+    }
+
     /* RESPONSIVE */
     @media (max-width: 960px) {
       .hero-grid {
@@ -1127,7 +1134,6 @@
       }
       .hero-card {
         order: -1;
-        margin-bottom: 1.4rem;
       }
       .services-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1161,13 +1167,19 @@
       .nav {
         padding: 0.7rem 0;
       }
+      .chat-widget {
+        right: 12px;
+        bottom: 12px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="page">
-    <div class="bg-gradient"></div>
-    <div class="bg-hero-wave"></div>
+    <!-- background glow orbs -->
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+    <div class="bg-orb orb-3"></div>
 
     <!-- NAVBAR -->
     <header>
@@ -1202,21 +1214,24 @@
     <main>
       <!-- HERO -->
       <section class="hero" id="top">
+        <div class="hero-gradient"></div>
+        <div class="hero-overlay"></div>
+
         <div class="container hero-grid">
           <div>
             <div class="eyebrow">
               <span class="badge">United States • Remote</span>
-              <span>Real small businesses. Real results.</span>
+              <span>Get a website that actually brings you customers.</span>
             </div>
             <h1>
-              Websites that look <span class="highlight">legit</span> and
-              actually make your phone ring.
+              Beautiful, <span class="highlight">high-converting</span> websites
+              for real small businesses.
             </h1>
             <p class="hero-subtitle">
               Jay's Web Design builds fast, modern websites, custom logos,
               <strong>SEO that ranks on Google</strong>, and
-              <strong>Google Ads that convert</strong> for businesses across
-              the United States.
+              <strong>Google Ads that convert</strong> for businesses across the
+              United States.
             </p>
 
             <div class="hero-cta-row">
@@ -1240,19 +1255,23 @@
               </div>
             </div>
 
-            <div class="hero-words">
-              We help you with&nbsp;
-              <span class="dynamic"></span>
+            <div class="hero-strip">
+              <span class="hero-strip-label">We build for</span>
+              <div class="hero-strip-words">
+                <span>tire shops & auto repair.</span>
+                <span>plumbers, installers & trades.</span>
+                <span>studios, marketers & creatives.</span>
+              </div>
             </div>
           </div>
 
-          <aside class="hero-card" aria-label="Recent work and results">
+          <aside class="hero-card" aria-label="Preview of your new site">
             <div class="hero-card-inner">
               <div class="hero-tag">
                 <span class="dot"></span>
-                <span>Preview of how your customers see you</span>
+                <span>Live-style preview</span>
               </div>
-              <h2>From “random Facebook page” to “real business” in one build.</h2>
+              <h2>What your customers see when they land on your site.</h2>
 
               <div class="mockup-window">
                 <div class="mockup-header">
@@ -1266,12 +1285,9 @@
                 <div class="mockup-body">
                   <div class="mockup-hero">
                     <div>
-                      <div class="mockup-hero-title">
-                        Need more calls this month?
-                      </div>
+                      <div class="mockup-hero-title">Need more customers?</div>
                       <div class="mockup-hero-sub">
-                        Turn Google searches into phone calls, bookings, and
-                        walk-ins — not just “website traffic”.
+                        Turn Google searches into phone calls and booked jobs.
                       </div>
                     </div>
                     <div>
@@ -1299,8 +1315,8 @@
                       <span>Yes ⚡</span>
                     </div>
                     <div class="mockup-row">
-                      <span>Timeline</span>
-                      <span>As fast as 7 days</span>
+                      <span>Device support</span>
+                      <span>Phone • Tablet • Desktop</span>
                     </div>
                   </div>
                 </div>
@@ -1308,7 +1324,7 @@
 
               <div class="badge">
                 <span class="spark">🌟</span>
-                <span>Perfect for local businesses, trades, studios, and brands.</span>
+                <span>We design with one goal: make your phone ring.</span>
               </div>
             </div>
           </aside>
@@ -1385,45 +1401,21 @@
           <div class="portfolio-grid">
             <a
               class="project-card"
-              href="https://tattoomaze.com/"
+              href="https://rushwheelandtire.com/"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <div class="project-image-wrap">
-                <img src="images/tattoomaze.jpg" alt="Tattoo Maze website screenshot" />
+              <div class="project-thumb">
+                <img src="images/rushwheel.jpg" alt="Rush Wheel & Tire website screenshot" />
               </div>
-              <div class="project-body">
-                <div class="project-topline">
-                  <span class="project-name">Tattoo Maze</span>
-                  <span class="project-tag">Tattoo & Piercing</span>
-                </div>
-                <div class="project-url">tattoomaze.com</div>
-                <div class="project-meta">
-                  <span>High-impact dark studio vibe</span>
-                  <span class="cta">View site ↗</span>
-                </div>
+              <div class="project-topline">
+                <span class="project-name">Rush Wheel & Tire</span>
+                <span class="project-tag">Automotive</span>
               </div>
-            </a>
-
-            <a
-              class="project-card"
-              href="https://plumbdaddy-texas.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <div class="project-image-wrap">
-                <img src="images/plumbdaddy.jpg" alt="Plumb Daddy website screenshot" />
-              </div>
-              <div class="project-body">
-                <div class="project-topline">
-                  <span class="project-name">Plumb Daddy Texas</span>
-                  <span class="project-tag">Plumbing</span>
-                </div>
-                <div class="project-url">plumbdaddy-texas.com</div>
-                <div class="project-meta">
-                  <span>Bright service-based lead funnel</span>
-                  <span class="cta">View site ↗</span>
-                </div>
+              <div class="project-url">rushwheelandtire.com</div>
+              <div class="project-meta">
+                <span class="industry">Custom shop website</span>
+                <span class="cta">View site ↗</span>
               </div>
             </a>
 
@@ -1433,41 +1425,57 @@
               target="_blank"
               rel="noopener noreferrer"
             >
-              <div class="project-image-wrap">
+              <div class="project-thumb">
                 <img src="images/edwins.jpg" alt="Edwin's Repair Shop website screenshot" />
               </div>
-              <div class="project-body">
-                <div class="project-topline">
-                  <span class="project-name">Edwin's Repair Shop</span>
-                  <span class="project-tag">Auto Repair</span>
-                </div>
-                <div class="project-url">edwinsrepairshop.com</div>
-                <div class="project-meta">
-                  <span>Bold red call-to-action layout</span>
-                  <span class="cta">View site ↗</span>
-                </div>
+              <div class="project-topline">
+                <span class="project-name">Edwin's Repair Shop</span>
+                <span class="project-tag">Auto Repair</span>
+              </div>
+              <div class="project-url">edwinsrepairshop.com</div>
+              <div class="project-meta">
+                <span class="industry">Local services</span>
+                <span class="cta">View site ↗</span>
               </div>
             </a>
 
             <a
               class="project-card"
-              href="https://rushwheelandtire.com/"
+              href="https://plumbdaddy-texas.com/"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <div class="project-image-wrap">
-                <img src="images/rushwheel.jpg" alt="Rush Wheels & Tires website screenshot" />
+              <div class="project-thumb">
+                <img src="images/plumbdaddy.jpg" alt="Plumb Daddy Texas website screenshot" />
               </div>
-              <div class="project-body">
-                <div class="project-topline">
-                  <span class="project-name">Rush Wheels & Tires</span>
-                  <span class="project-tag">Automotive</span>
-                </div>
-                <div class="project-url">rushwheelandtire.com</div>
-                <div class="project-meta">
-                  <span>High-energy automotive landing</span>
-                  <span class="cta">View site ↗</span>
-                </div>
+              <div class="project-topline">
+                <span class="project-name">Plumb Daddy Texas</span>
+                <span class="project-tag">Plumbing</span>
+              </div>
+              <div class="project-url">plumbdaddy-texas.com</div>
+              <div class="project-meta">
+                <span class="industry">Home services</span>
+                <span class="cta">View site ↗</span>
+              </div>
+            </a>
+
+            <a
+              class="project-card"
+              href="https://tattoomaze.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div class="project-thumb">
+                <img src="images/tattoomaze.jpg" alt="Tattoo Maze website screenshot" />
+              </div>
+              <div class="project-topline">
+                <span class="project-name">Tattoo Maze</span>
+                <span class="project-tag">Creative</span>
+              </div>
+              <div class="project-url">tattoomaze.com</div>
+              <div class="project-meta">
+                <span class="industry">Art & studio</span>
+                <span class="cta">View site ↗</span>
               </div>
             </a>
 
@@ -1477,19 +1485,17 @@
               target="_blank"
               rel="noopener noreferrer"
             >
-              <div class="project-image-wrap">
+              <div class="project-thumb">
                 <img src="images/rginstallation.jpg" alt="RG Installation website screenshot" />
               </div>
-              <div class="project-body">
-                <div class="project-topline">
-                  <span class="project-name">RG Installation</span>
-                  <span class="project-tag">Construction</span>
-                </div>
-                <div class="project-url">rginstallation.org</div>
-                <div class="project-meta">
-                  <span>Clean corporate trades design</span>
-                  <span class="cta">View site ↗</span>
-                </div>
+              <div class="project-topline">
+                <span class="project-name">RG Installation</span>
+                <span class="project-tag">Construction</span>
+              </div>
+              <div class="project-url">rginstallation.org</div>
+              <div class="project-meta">
+                <span class="industry">Trades & install</span>
+                <span class="cta">View site ↗</span>
               </div>
             </a>
 
@@ -1499,19 +1505,17 @@
               target="_blank"
               rel="noopener noreferrer"
             >
-              <div class="project-image-wrap">
+              <div class="project-thumb">
                 <img src="images/socialplug.jpg" alt="Social Plug Media website screenshot" />
               </div>
-              <div class="project-body">
-                <div class="project-topline">
-                  <span class="project-name">Social Plug Media</span>
-                  <span class="project-tag">Media & Branding</span>
-                </div>
-                <div class="project-url">socialplugmedia.net</div>
-                <div class="project-meta">
-                  <span>Neon brand-forward vibe</span>
-                  <span class="cta">View site ↗</span>
-                </div>
+              <div class="project-topline">
+                <span class="project-name">Social Plug Media</span>
+                <span class="project-tag">Marketing</span>
+              </div>
+              <div class="project-url">socialplugmedia.net</div>
+              <div class="project-meta">
+                <span class="industry">Digital marketing</span>
+                <span class="cta">View site ↗</span>
               </div>
             </a>
           </div>
@@ -1683,46 +1687,63 @@
       </div>
     </footer>
 
-    <!-- CHAT WIDGET -->
+    <!-- Floating SMS chat -->
     <div class="chat-widget">
-      <button class="chat-bubble-btn" id="chatToggle" aria-label="Chat with us">
-        💬
-      </button>
       <div class="chat-panel" id="chatPanel">
         <div class="chat-panel-header">
-          <div>
-            <div class="chat-panel-title">Chat with Jay's Web Design</div>
-            <div class="chat-panel-badge">
-              <span class="dot"></span>
-              <span>Replies by text message</span>
-            </div>
+          <span class="title">
+            <strong>Chat with Jay's Web Design</strong>
+            <small>Replies by SMS to your phone</small>
+          </span>
+          <span class="chat-close" id="chatClose">✕</span>
+        </div>
+        <div class="chat-panel-body">
+          <p>Send us a quick message and we’ll text you back as soon as possible.</p>
+        </div>
+        <div class="chat-input-area">
+          <textarea
+            id="chatMessage"
+            placeholder="Type your message here..."
+          ></textarea>
+          <button id="chatSend">
+            📲 Send via SMS
+          </button>
+          <div class="chat-input-hint">
+            Opens your SMS app and sends to <strong>(830) 290-5856</strong>.
           </div>
         </div>
-        <p>
-          Want pricing or have a quick question? Tap below to text us directly.
-        </p>
-        <a
-          class="sms-btn"
-          href="sms:+18302905856"
-        >
-          <span class="icon">📱</span>
-          Text (830) 290-5856
-        </a>
-        <div class="chat-panel-footer">
-          Opens your phone's SMS app. Standard message rates may apply.
-        </div>
+      </div>
+
+      <div class="chat-label">Questions? Text us.</div>
+      <div class="chat-bubble" id="chatBubble" title="Chat via text">
+        💬
       </div>
     </div>
   </div>
 
   <script>
+    // Footer year
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    const chatToggle = document.getElementById("chatToggle");
+    // Simple SMS chat widget behavior
+    const chatBubble = document.getElementById("chatBubble");
     const chatPanel = document.getElementById("chatPanel");
+    const chatClose = document.getElementById("chatClose");
+    const chatSend = document.getElementById("chatSend");
+    const chatMessage = document.getElementById("chatMessage");
 
-    chatToggle.addEventListener("click", () => {
-      chatPanel.classList.toggle("open");
+    chatBubble.addEventListener("click", () => {
+      chatPanel.style.display = chatPanel.style.display === "flex" ? "none" : "flex";
+    });
+
+    chatClose.addEventListener("click", () => {
+      chatPanel.style.display = "none";
+    });
+
+    chatSend.addEventListener("click", () => {
+      const message = encodeURIComponent(chatMessage.value || "");
+      // This opens SMS to your number with the message pre-filled
+      window.location.href = "sms:+18302905856?&body=" + message;
     });
   </script>
 </body>
