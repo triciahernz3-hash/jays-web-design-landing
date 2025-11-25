@@ -1,0 +1,1729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Jay's Web Design | Websites, Logos, SEO & Google Ads</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Jay's Web Design builds high-converting websites, logos, SEO and Google Ads campaigns for businesses across the United States."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --bg: #020617;
+      --accent: #00c6ff;
+      --accent-2: #ff4b8b;
+      --accent-soft: rgba(0, 198, 255, 0.12);
+      --text: #f9fafb;
+      --muted: #9ca3af;
+      --card: #020617;
+      --radius-xl: 18px;
+      --radius-xxl: 26px;
+      --shadow-soft: 0 24px 60px rgba(0, 0, 0, 0.8);
+      --shadow-card: 0 18px 40px rgba(0, 0, 0, 0.7);
+      --max-width: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      background: #020617;
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.4rem;
+    }
+
+    /* ANIMATED BACKGROUND LAYERS */
+    .bg-gradient {
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      background: radial-gradient(circle at top left, #1f2937, transparent 55%),
+        radial-gradient(circle at top right, #111827, transparent 55%),
+        radial-gradient(circle at bottom, #020617, #000000);
+    }
+
+    .bg-hero-wave {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background: linear-gradient(
+        120deg,
+        rgba(0, 198, 255, 0.25),
+        rgba(255, 75, 139, 0.3),
+        rgba(56, 189, 248, 0.25)
+      );
+      mix-blend-mode: screen;
+      opacity: 0.55;
+      filter: blur(10px);
+      background-size: 200% 200%;
+      animation: heroGradient 18s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes heroGradient {
+      0% {
+        transform: translate3d(0, 0, 0);
+        background-position: 0% 50%;
+      }
+      50% {
+        transform: translate3d(-10px, 10px, 0);
+        background-position: 100% 50%;
+      }
+      100% {
+        transform: translate3d(0, 0, 0);
+        background-position: 0% 50%;
+      }
+    }
+
+    /* NAVBAR */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(22px);
+      background: linear-gradient(
+        to bottom,
+        rgba(2, 6, 23, 0.96),
+        rgba(2, 6, 23, 0.7),
+        transparent
+      );
+      border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 0;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .logo-circle {
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      background: radial-gradient(
+        circle at 25% 25%,
+        #ffffff,
+        #00c6ff 35%,
+        #020617
+      );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow:
+        0 0 0 3px rgba(15, 23, 42, 0.9),
+        0 0 22px rgba(0, 198, 255, 0.8);
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: #020617;
+    }
+
+    .nav-title {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .nav-title span:first-child {
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    .nav-title span:last-child {
+      font-size: 0.76rem;
+      color: var(--muted);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.6rem;
+      font-size: 0.88rem;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      border-radius: 999px;
+      transition: width 0.22s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .pill {
+      border-radius: 999px;
+      padding: 0.3rem 0.9rem;
+      font-size: 0.72rem;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      color: var(--muted);
+      background: rgba(15, 23, 42, 0.95);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 14px rgba(34, 197, 94, 0.85);
+    }
+
+    .btn-primary {
+      padding: 0.52rem 1.05rem;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #020617;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      box-shadow:
+        0 14px 30px rgba(0, 0, 0, 0.85),
+        0 0 22px rgba(0, 198, 255, 0.6);
+      transition:
+        transform 0.16s ease,
+        box-shadow 0.16s ease,
+        opacity 0.16s ease,
+        filter 0.16s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px) scale(1.01);
+      box-shadow:
+        0 18px 40px rgba(0, 0, 0, 0.96),
+        0 0 26px rgba(0, 198, 255, 0.9);
+      filter: brightness(1.04);
+    }
+
+    .btn-primary span.icon {
+      font-size: 1rem;
+    }
+
+    .btn-ghost {
+      padding: 0.5rem 1.05rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      background: rgba(15, 23, 42, 0.96);
+      color: var(--muted);
+      font-size: 0.82rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      cursor: pointer;
+      transition:
+        border-color 0.16s ease,
+        background 0.16s ease,
+        color 0.16s ease;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: #e5e7eb;
+      background: rgba(15, 23, 42, 1);
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      padding: 3rem 0 3.6rem;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        circle at top,
+        rgba(15, 23, 42, 0.3),
+        rgba(2, 6, 23, 0.95)
+      );
+      z-index: -1;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1.05fr);
+      gap: 2.7rem;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.76rem;
+      padding: 0.2rem 0.85rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .eyebrow span.badge {
+      font-size: 0.72rem;
+      color: var(--accent);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 4vw, 3.3rem);
+      line-height: 1.02;
+      margin-bottom: 0.9rem;
+    }
+
+    .hero h1 span.highlight {
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 34rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-subtitle strong {
+      color: #e5e7eb;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      align-items: center;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .hero-meta span.label {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* rotating keywords under hero */
+    .hero-words {
+      margin-top: 0.7rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .hero-words span.dynamic {
+      display: inline-block;
+      min-width: 110px;
+      color: var(--accent-2);
+      font-weight: 600;
+      animation: rotateWords 9s linear infinite;
+    }
+
+    @keyframes rotateWords {
+      0%, 16% { content: "websites"; }
+      17%, 33% { content: "logos"; }
+      34%, 50% { content: "SEO"; }
+      51%, 67% { content: "Google Ads"; }
+      68%, 84% { content: "landing pages"; }
+      85%, 100% { content: "brand vibes"; }
+    }
+
+    .hero-words span.dynamic::after {
+      content: "websites";
+      animation: dynamicText 10s linear infinite;
+    }
+
+    @keyframes dynamicText {
+      0%, 16% { content: "websites"; }
+      17%, 33% { content: "logos"; }
+      34%, 50% { content: "SEO"; }
+      51%, 67% { content: "Google Ads"; }
+      68%, 84% { content: "landing pages"; }
+      85%, 100% { content: "brand vibes"; }
+    }
+
+    /* HERO MOCKUP CARD */
+    .hero-card {
+      border-radius: var(--radius-xxl);
+      padding: 1.3rem 1.4rem 1.4rem;
+      background: linear-gradient(
+        145deg,
+        rgba(15, 23, 42, 0.96),
+        rgba(2, 6, 23, 0.98)
+      );
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      width: 180%;
+      height: 180%;
+      background: radial-gradient(
+          circle at top right,
+          rgba(0, 198, 255, 0.25),
+          transparent 55%
+        ),
+        radial-gradient(
+          circle at bottom left,
+          rgba(255, 75, 139, 0.25),
+          transparent 55%
+        );
+      top: -40%;
+      left: -20%;
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .hero-card-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-tag {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .hero-tag span.dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 14px rgba(34, 197, 94, 0.9);
+    }
+
+    .hero-card h2 {
+      font-size: 1.05rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .mockup-window {
+      border-radius: 18px;
+      border: 1px solid rgba(15, 23, 42, 0.95);
+      background: rgba(15, 23, 42, 0.95);
+      padding: 0.5rem 0.55rem 0.6rem;
+      box-shadow: var(--shadow-card);
+      margin-bottom: 0.8rem;
+    }
+
+    .mockup-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.68rem;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .window-dots {
+      display: flex;
+      gap: 0.22rem;
+    }
+
+    .window-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #4b5563;
+    }
+
+    .mockup-body {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 0.6rem;
+      font-size: 0.72rem;
+    }
+
+    .mockup-hero {
+      border-radius: 12px;
+      background: radial-gradient(
+          circle at top left,
+          rgba(0, 198, 255, 0.38),
+          transparent 60%
+        ),
+        radial-gradient(
+          circle at bottom right,
+          rgba(255, 75, 139, 0.38),
+          transparent 60%
+        );
+      padding: 0.7rem;
+      color: #0b1120;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .mockup-hero-title {
+      font-weight: 700;
+      font-size: 0.8rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .mockup-hero-sub {
+      font-size: 0.7rem;
+    }
+
+    .mockup-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-top: 0.45rem;
+    }
+
+    .mockup-pill {
+      font-size: 0.65rem;
+      padding: 0.13rem 0.5rem;
+      border-radius: 999px;
+      border: 1px solid rgba(15, 23, 42, 0.55);
+      background: rgba(248, 250, 252, 0.92);
+    }
+
+    .mockup-cta {
+      margin-top: 0.45rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.7rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.85);
+      color: #e5e7eb;
+    }
+
+    .mockup-sidebar {
+      border-radius: 12px;
+      border: 1px dashed rgba(148, 163, 184, 0.5);
+      padding: 0.5rem;
+      background: rgba(15, 23, 42, 0.86);
+      display: grid;
+      gap: 0.35rem;
+    }
+
+    .mockup-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.96);
+      font-size: 0.74rem;
+      margin-top: 0.6rem;
+    }
+
+    .badge span.spark {
+      font-size: 0.9rem;
+    }
+
+    /* SECTION WRAPPER */
+    section {
+      padding: 2rem 0 2.3rem;
+    }
+
+    section + section {
+      border-top: 1px solid rgba(15, 23, 42, 0.9);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .section-header h2 {
+      font-size: 1.35rem;
+    }
+
+    .section-header p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      max-width: 26rem;
+    }
+
+    /* SERVICES */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .service-card {
+      background: radial-gradient(circle at top, #020617, #020617 40%, #000000);
+      border-radius: var(--radius-xl);
+      padding: 1.05rem 1rem;
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      box-shadow: var(--shadow-card);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        circle at top right,
+        rgba(0, 198, 255, 0.16),
+        transparent 60%
+      );
+      opacity: 0;
+      transition: opacity 0.16s ease;
+      pointer-events: none;
+    }
+
+    .service-card:hover::before {
+      opacity: 1;
+    }
+
+    .service-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.05rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .service-card h3 {
+      font-size: 0.95rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .service-card p {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .service-pill {
+      font-size: 0.7rem;
+      color: var(--accent);
+    }
+
+    /* PORTFOLIO */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .project-card {
+      background: #020617;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(31, 41, 55, 0.96);
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+      transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        border-color 0.18s ease;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: var(--shadow-card);
+      border-color: var(--accent);
+    }
+
+    .project-image-wrap {
+      position: relative;
+      overflow: hidden;
+      max-height: 180px;
+    }
+
+    .project-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .project-card:hover .project-image-wrap img {
+      transform: scale(1.04);
+    }
+
+    .project-body {
+      padding: 0.8rem 0.9rem 0.95rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      flex: 1;
+    }
+
+    .project-topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .project-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .project-tag {
+      font-size: 0.7rem;
+      color: var(--accent);
+    }
+
+    .project-url {
+      font-size: 0.78rem;
+      color: var(--muted);
+      word-break: break-all;
+    }
+
+    .project-meta {
+      margin-top: 0.35rem;
+      font-size: 0.74rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .project-meta span.cta {
+      color: #e5e7eb;
+      font-size: 0.75rem;
+    }
+
+    /* CONTACT */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 1.8rem;
+      align-items: flex-start;
+    }
+
+    .contact-card {
+      background: radial-gradient(
+          circle at top left,
+          rgba(0, 198, 255, 0.22),
+          transparent 55%
+        ),
+        radial-gradient(
+          circle at bottom right,
+          rgba(255, 75, 139, 0.2),
+          transparent 55%
+        ),
+        #020617;
+      border-radius: var(--radius-xxl);
+      padding: 1.35rem 1.3rem 1.45rem;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(31, 41, 55, 0.96);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(148, 163, 184, 0.12),
+        transparent 55%
+      );
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .contact-card-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact-card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .contact-card p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .contact-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-bottom: 1rem;
+      font-size: 0.78rem;
+    }
+
+    .contact-pill {
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      color: var(--muted);
+      background: rgba(15, 23, 42, 0.96);
+    }
+
+    form {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    label {
+      font-size: 0.8rem;
+      color: #e5e7eb;
+      display: block;
+      margin-bottom: 0.15rem;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(31, 41, 55, 0.98);
+      padding: 0.6rem 0.7rem;
+      background: rgba(15, 23, 42, 0.96);
+      color: var(--text);
+      font-size: 0.85rem;
+      outline: none;
+      transition:
+        border-color 0.15s ease,
+        box-shadow 0.15s ease,
+        background 0.15s ease;
+      resize: vertical;
+      min-height: 0;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(0, 198, 255, 0.4);
+      background: #020617;
+    }
+
+    textarea {
+      min-height: 112px;
+    }
+
+    .form-row-inline {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+
+    .form-hint {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
+    }
+
+    .contact-sidebar {
+      font-size: 0.85rem;
+      color: var(--muted);
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact-sidebar h3 {
+      font-size: 0.95rem;
+      margin-bottom: 0.4rem;
+      color: #e5e7eb;
+    }
+
+    .contact-detail {
+      margin-bottom: 0.6rem;
+    }
+
+    .contact-detail span.label {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .contact-detail a {
+      font-size: 0.9rem;
+      color: var(--accent);
+    }
+
+    .contact-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.98);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      font-size: 0.75rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .contact-badge span.dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
+    }
+
+    .contact-note {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 0.6rem;
+    }
+
+    /* CHAT WIDGET */
+    .chat-widget {
+      position: fixed;
+      bottom: 20px;
+      right: 18px;
+      z-index: 60;
+      font-size: 14px;
+    }
+
+    .chat-bubble-btn {
+      width: 52px;
+      height: 52px;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, var(--accent-2), var(--accent));
+      color: #020617;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      box-shadow:
+        0 14px 34px rgba(0, 0, 0, 0.9),
+        0 0 18px rgba(0, 198, 255, 0.8);
+      cursor: pointer;
+      transition:
+        transform 0.16s ease,
+        box-shadow 0.16s ease,
+        filter 0.16s ease;
+    }
+
+    .chat-bubble-btn:hover {
+      transform: translateY(-2px) scale(1.03);
+      filter: brightness(1.05);
+    }
+
+    .chat-panel {
+      position: absolute;
+      right: 0;
+      bottom: 60px;
+      width: 270px;
+      border-radius: 18px;
+      background: rgba(15, 23, 42, 0.98);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      box-shadow: var(--shadow-soft);
+      padding: 0.75rem 0.85rem 0.9rem;
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition:
+        opacity 0.18s ease,
+        transform 0.18s ease;
+    }
+
+    .chat-panel.open {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .chat-panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .chat-panel-title {
+      font-size: 0.86rem;
+      font-weight: 600;
+    }
+
+    .chat-panel-badge {
+      font-size: 0.7rem;
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .chat-panel-badge span.dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
+    }
+
+    .chat-panel p {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .chat-panel a.sms-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #020617;
+      font-size: 0.82rem;
+      font-weight: 600;
+      box-shadow:
+        0 12px 26px rgba(0, 0, 0, 0.9),
+        0 0 16px rgba(0, 198, 255, 0.7);
+    }
+
+    .chat-panel a.sms-btn span.icon {
+      margin-right: 0.35rem;
+    }
+
+    .chat-panel-footer {
+      margin-top: 0.35rem;
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid rgba(15, 23, 42, 0.95);
+      padding: 1.2rem 0 1.6rem;
+      margin-top: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+      background: rgba(2, 6, 23, 0.98);
+    }
+
+    .footer-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.8rem;
+    }
+
+    .footer-row a {
+      color: var(--muted);
+    }
+
+    .footer-row a:hover {
+      color: var(--accent);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 960px) {
+      .hero-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero-card {
+        order: -1;
+        margin-bottom: 1.4rem;
+      }
+      .services-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .portfolio-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .contact-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .nav-links {
+        display: none;
+      }
+      .hero {
+        padding-top: 2.3rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .services-grid,
+      .portfolio-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .form-row-inline {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .nav {
+        padding: 0.7rem 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="bg-gradient"></div>
+    <div class="bg-hero-wave"></div>
+
+    <!-- NAVBAR -->
+    <header>
+      <div class="container nav">
+        <div class="nav-left">
+          <div class="logo-circle">J</div>
+          <div class="nav-title">
+            <span>Jay's Web Design</span>
+            <span>Websites • Logos • SEO • Google Ads</span>
+          </div>
+        </div>
+        <div class="nav-right">
+          <nav class="nav-links">
+            <a href="#services">Services</a>
+            <a href="#portfolio">Our Work</a>
+            <a href="#contact">Contact</a>
+          </nav>
+          <div class="nav-cta">
+            <span class="pill">
+              <span class="pill-dot"></span>
+              Booking new projects across the U.S.
+            </span>
+            <a class="btn-primary" href="tel:18302905856">
+              <span class="icon">📞</span>
+              Call (830) 290-5856
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero" id="top">
+        <div class="container hero-grid">
+          <div>
+            <div class="eyebrow">
+              <span class="badge">United States • Remote</span>
+              <span>Real small businesses. Real results.</span>
+            </div>
+            <h1>
+              Websites that look <span class="highlight">legit</span> and
+              actually make your phone ring.
+            </h1>
+            <p class="hero-subtitle">
+              Jay's Web Design builds fast, modern websites, custom logos,
+              <strong>SEO that ranks on Google</strong>, and
+              <strong>Google Ads that convert</strong> for businesses across
+              the United States.
+            </p>
+
+            <div class="hero-cta-row">
+              <a class="btn-primary" href="tel:18302905856">
+                <span class="icon">✨</span>
+                Call now for a free quote
+              </a>
+              <a class="btn-ghost" href="#contact">
+                🚀 Get a website started
+              </a>
+            </div>
+
+            <div class="hero-meta">
+              <div>
+                <span class="label">Services:</span>
+                <span>Websites • Logos • SEO • Google Ads</span>
+              </div>
+              <div>
+                <span class="label">Service area:</span>
+                <span>All 50 states (U.S.A.)</span>
+              </div>
+            </div>
+
+            <div class="hero-words">
+              We help you with&nbsp;
+              <span class="dynamic"></span>
+            </div>
+          </div>
+
+          <aside class="hero-card" aria-label="Recent work and results">
+            <div class="hero-card-inner">
+              <div class="hero-tag">
+                <span class="dot"></span>
+                <span>Preview of how your customers see you</span>
+              </div>
+              <h2>From “random Facebook page” to “real business” in one build.</h2>
+
+              <div class="mockup-window">
+                <div class="mockup-header">
+                  <div class="window-dots">
+                    <span class="window-dot"></span>
+                    <span class="window-dot"></span>
+                    <span class="window-dot"></span>
+                  </div>
+                  <span>yourbusiness.com</span>
+                </div>
+                <div class="mockup-body">
+                  <div class="mockup-hero">
+                    <div>
+                      <div class="mockup-hero-title">
+                        Need more calls this month?
+                      </div>
+                      <div class="mockup-hero-sub">
+                        Turn Google searches into phone calls, bookings, and
+                        walk-ins — not just “website traffic”.
+                      </div>
+                    </div>
+                    <div>
+                      <div class="mockup-pill-row">
+                        <div class="mockup-pill">Mobile friendly</div>
+                        <div class="mockup-pill">Loads fast</div>
+                        <div class="mockup-pill">SEO-ready</div>
+                      </div>
+                      <div class="mockup-cta">
+                        Get a free quote <span>↗</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mockup-sidebar">
+                    <div class="mockup-row">
+                      <span>Website build</span>
+                      <span>Included ✅</span>
+                    </div>
+                    <div class="mockup-row">
+                      <span>SEO setup</span>
+                      <span>Included ✅</span>
+                    </div>
+                    <div class="mockup-row">
+                      <span>Google Ads ready</span>
+                      <span>Yes ⚡</span>
+                    </div>
+                    <div class="mockup-row">
+                      <span>Timeline</span>
+                      <span>As fast as 7 days</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="badge">
+                <span class="spark">🌟</span>
+                <span>Perfect for local businesses, trades, studios, and brands.</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- SERVICES -->
+      <section id="services">
+        <div class="container">
+          <div class="section-header">
+            <h2>What we do for your business</h2>
+            <p>
+              From your first logo to a full website and Google Ads campaign,
+              Jay's Web Design is your all-in-one partner for a professional
+              online presence that actually works.
+            </p>
+          </div>
+
+          <div class="services-grid">
+            <div class="service-card">
+              <div class="service-icon">💻</div>
+              <h3>Custom Websites</h3>
+              <p>
+                Clean, modern websites built for speed, mobile, and conversions.
+                We focus on getting you more calls, messages, and customers.
+              </p>
+              <div class="service-pill">Landing pages • Full sites</div>
+            </div>
+
+            <div class="service-card">
+              <div class="service-icon">🎨</div>
+              <h3>Logos & Branding</h3>
+              <p>
+                Professional logo design and simple brand kits that make your
+                business look established and trustworthy online and offline.
+              </p>
+              <div class="service-pill">Logos • Colors • Fonts</div>
+            </div>
+
+            <div class="service-card">
+              <div class="service-icon">📈</div>
+              <h3>SEO Setup</h3>
+              <p>
+                On-page SEO so your business can be found by local customers
+                searching for what you do on Google.
+              </p>
+              <div class="service-pill">Keywords • Meta tags • Local SEO basics</div>
+            </div>
+
+            <div class="service-card">
+              <div class="service-icon">⚡</div>
+              <h3>Google Ads</h3>
+              <p>
+                High-intent, ready-to-buy traffic sent directly to your website
+                with well-structured Google search campaigns.
+              </p>
+              <div class="service-pill">Search ads • Local leads</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PORTFOLIO -->
+      <section id="portfolio">
+        <div class="container">
+          <div class="section-header">
+            <h2>Websites we've built</h2>
+            <p>
+              A few real websites we've worked on. Click any project to open it
+              in a new tab and explore the live site.
+            </p>
+          </div>
+
+          <div class="portfolio-grid">
+            <a
+              class="project-card"
+              href="https://tattoomaze.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div class="project-image-wrap">
+                <img src="images/tattoomaze.jpg" alt="Tattoo Maze website screenshot" />
+              </div>
+              <div class="project-body">
+                <div class="project-topline">
+                  <span class="project-name">Tattoo Maze</span>
+                  <span class="project-tag">Tattoo & Piercing</span>
+                </div>
+                <div class="project-url">tattoomaze.com</div>
+                <div class="project-meta">
+                  <span>High-impact dark studio vibe</span>
+                  <span class="cta">View site ↗</span>
+                </div>
+              </div>
+            </a>
+
+            <a
+              class="project-card"
+              href="https://plumbdaddy-texas.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div class="project-image-wrap">
+                <img src="images/plumbdaddy.jpg" alt="Plumb Daddy website screenshot" />
+              </div>
+              <div class="project-body">
+                <div class="project-topline">
+                  <span class="project-name">Plumb Daddy Texas</span>
+                  <span class="project-tag">Plumbing</span>
+                </div>
+                <div class="project-url">plumbdaddy-texas.com</div>
+                <div class="project-meta">
+                  <span>Bright service-based lead funnel</span>
+                  <span class="cta">View site ↗</span>
+                </div>
+              </div>
+            </a>
+
+            <a
+              class="project-card"
+              href="https://edwinsrepairshop.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div class="project-image-wrap">
+                <img src="images/edwins.jpg" alt="Edwin's Repair Shop website screenshot" />
+              </div>
+              <div class="project-body">
+                <div class="project-topline">
+                  <span class="project-name">Edwin's Repair Shop</span>
+                  <span class="project-tag">Auto Repair</span>
+                </div>
+                <div class="project-url">edwinsrepairshop.com</div>
+                <div class="project-meta">
+                  <span>Bold red call-to-action layout</span>
+                  <span class="cta">View site ↗</span>
+                </div>
+              </div>
+            </a>
+
+            <a
+              class="project-card"
+              href="https://rushwheelandtire.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div class="project-image-wrap">
+                <img src="images/rushwheel.jpg" alt="Rush Wheels & Tires website screenshot" />
+              </div>
+              <div class="project-body">
+                <div class="project-topline">
+                  <span class="project-name">Rush Wheels & Tires</span>
+                  <span class="project-tag">Automotive</span>
+                </div>
+                <div class="project-url">rushwheelandtire.com</div>
+                <div class="project-meta">
+                  <span>High-energy automotive landing</span>
+                  <span class="cta">View site ↗</span>
+                </div>
+              </div>
+            </a>
+
+            <a
+              class="project-card"
+              href="https://www.rginstallation.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div class="project-image-wrap">
+                <img src="images/rginstallation.jpg" alt="RG Installation website screenshot" />
+              </div>
+              <div class="project-body">
+                <div class="project-topline">
+                  <span class="project-name">RG Installation</span>
+                  <span class="project-tag">Construction</span>
+                </div>
+                <div class="project-url">rginstallation.org</div>
+                <div class="project-meta">
+                  <span>Clean corporate trades design</span>
+                  <span class="cta">View site ↗</span>
+                </div>
+              </div>
+            </a>
+
+            <a
+              class="project-card"
+              href="https://socialplugmedia.net/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div class="project-image-wrap">
+                <img src="images/socialplug.jpg" alt="Social Plug Media website screenshot" />
+              </div>
+              <div class="project-body">
+                <div class="project-topline">
+                  <span class="project-name">Social Plug Media</span>
+                  <span class="project-tag">Media & Branding</span>
+                </div>
+                <div class="project-url">socialplugmedia.net</div>
+                <div class="project-meta">
+                  <span>Neon brand-forward vibe</span>
+                  <span class="cta">View site ↗</span>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact">
+        <div class="container">
+          <div class="section-header">
+            <h2>Tell us about your project</h2>
+            <p>
+              Whether you need a simple landing page or a full website with
+              SEO and Google Ads, send us a quick message and we'll reply with
+              next steps and pricing.
+            </p>
+          </div>
+
+          <div class="contact-layout">
+            <div class="contact-card">
+              <div class="contact-card-inner">
+                <h3>Get a free, no-pressure quote</h3>
+                <p>
+                  Fill this out and we’ll get back to you by email or text as
+                  soon as possible.
+                </p>
+
+                <div class="contact-pill-row">
+                  <div class="contact-pill">Websites</div>
+                  <div class="contact-pill">Logos</div>
+                  <div class="contact-pill">SEO setup</div>
+                  <div class="contact-pill">Google Ads</div>
+                  <div class="contact-pill">Bundles available</div>
+                </div>
+
+                <!-- CONTACT FORM -->
+                <form
+                  action="https://formsubmit.co/bluebisonwebdesign@gmail.com"
+                  method="POST"
+                >
+                  <input type="hidden" name="_captcha" value="false" />
+                  <input
+                    type="hidden"
+                    name="_subject"
+                    value="New lead from Jay's Web Design landing page"
+                  />
+                  <input type="hidden" name="_template" value="table" />
+
+                  <div class="form-row-inline">
+                    <div>
+                      <label for="name">Full name *</label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="Name"
+                        placeholder="Enter your name"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label for="email">Email *</label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="Email"
+                        placeholder="you@example.com"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div class="form-row-inline">
+                    <div>
+                      <label for="phone">Phone number</label>
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="Phone"
+                        placeholder="(123) 456-7890"
+                      />
+                    </div>
+                    <div>
+                      <label for="service">What do you need?</label>
+                      <select id="service" name="Service">
+                        <option value="Website">Website</option>
+                        <option value="Logo">Logo</option>
+                        <option value="SEO">SEO setup</option>
+                        <option value="Google Ads">Google Ads</option>
+                        <option value="Multiple services">
+                          Multiple services / bundle
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label for="business">Business name</label>
+                    <input
+                      type="text"
+                      id="business"
+                      name="Business"
+                      placeholder="Your business or project name"
+                    />
+                  </div>
+
+                  <div>
+                    <label for="message">Tell us a little about your project *</label>
+                    <textarea
+                      id="message"
+                      name="Message"
+                      placeholder="Example: I need a 1-page website for my local business with basic SEO and Google Ads."
+                      required
+                    ></textarea>
+                  </div>
+
+                  <button class="btn-primary" type="submit">
+                    <span class="icon">📩</span>
+                    Send my project details
+                  </button>
+                  <div class="form-hint">
+                    This form sends directly to
+                    <strong>bluebisonwebdesign@gmail.com</strong>.
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <aside class="contact-sidebar">
+              <div class="contact-badge">
+                <span class="dot"></span>
+                <span>Now booking new projects across the United States</span>
+              </div>
+
+              <h3>Prefer to talk first?</h3>
+              <div class="contact-detail">
+                <span class="label">Call or text</span>
+                <a href="tel:18302905856">(830) 290-5856</a>
+              </div>
+
+              <div class="contact-detail">
+                <span class="label">Email</span>
+                <a href="mailto:bluebisonwebdesign@gmail.com"
+                  >bluebisonwebdesign@gmail.com</a
+                >
+              </div>
+
+              <p>
+                We work with businesses in <strong>all 50 U.S. states</strong> —
+                from local shops and home services to online brands and
+                marketing agencies.
+              </p>
+
+              <p class="contact-note">
+                Tell us your budget and goals, and we’ll recommend the best
+                mix of website, SEO, and ads so you’re not wasting money.
+              </p>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container footer-row">
+        <div>
+          © <span id="year"></span> Jay's Web Design. All rights reserved.
+        </div>
+        <div>Serving businesses across the United States.</div>
+      </div>
+    </footer>
+
+    <!-- CHAT WIDGET -->
+    <div class="chat-widget">
+      <button class="chat-bubble-btn" id="chatToggle" aria-label="Chat with us">
+        💬
+      </button>
+      <div class="chat-panel" id="chatPanel">
+        <div class="chat-panel-header">
+          <div>
+            <div class="chat-panel-title">Chat with Jay's Web Design</div>
+            <div class="chat-panel-badge">
+              <span class="dot"></span>
+              <span>Replies by text message</span>
+            </div>
+          </div>
+        </div>
+        <p>
+          Want pricing or have a quick question? Tap below to text us directly.
+        </p>
+        <a
+          class="sms-btn"
+          href="sms:+18302905856"
+        >
+          <span class="icon">📱</span>
+          Text (830) 290-5856
+        </a>
+        <div class="chat-panel-footer">
+          Opens your phone's SMS app. Standard message rates may apply.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const chatToggle = document.getElementById("chatToggle");
+    const chatPanel = document.getElementById("chatPanel");
+
+    chatToggle.addEventListener("click", () => {
+      chatPanel.classList.toggle("open");
+    });
+  </script>
+</body>
+</html>
