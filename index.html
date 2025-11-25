@@ -19,10 +19,10 @@
       --bg: #020617;
       --accent: #00c6ff;
       --accent-2: #ff4b8b;
-      --accent-soft: rgba(0, 198, 255, 0.12);
       --text: #f9fafb;
       --muted: #9ca3af;
       --card: #020617;
+      --border: rgba(148, 163, 184, 0.25);
       --radius-xl: 18px;
       --radius-xxl: 26px;
       --shadow-soft: 0 24px 60px rgba(0, 0, 0, 0.8);
@@ -71,7 +71,7 @@
       position: fixed;
       border-radius: 999px;
       filter: blur(40px);
-      opacity: 0.5;
+      opacity: 0.55;
       z-index: -2;
       pointer-events: none;
     }
@@ -283,47 +283,14 @@
     /* HERO */
     .hero {
       position: relative;
-      padding: 3rem 0 3.6rem;
+      padding: 3rem 0 3.4rem;
       overflow: hidden;
-    }
-
-    /* animated gradient hero background (no client images here) */
-    .hero-gradient {
-      position: absolute;
-      inset: -40%;
-      background: conic-gradient(
-        from 140deg,
-        #00c6ff,
-        #ff4b8b,
-        #6366f1,
-        #00c6ff
-      );
-      opacity: 0.32;
-      filter: blur(60px);
-      animation: spin 22s linear infinite;
-      z-index: -2;
-    }
-
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top, rgba(2, 6, 23, 0.7), #020617);
-      z-index: -1;
-    }
-
-    @keyframes spin {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
-      }
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1.1fr);
-      gap: 2.7rem;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1.05fr);
+      gap: 2.6rem;
       align-items: center;
     }
 
@@ -377,7 +344,7 @@
       flex-wrap: wrap;
       gap: 0.9rem;
       align-items: center;
-      margin-bottom: 1.4rem;
+      margin-bottom: 1.3rem;
     }
 
     .hero-meta {
@@ -393,240 +360,163 @@
       font-weight: 500;
     }
 
-    /* rotating word strip */
-    .hero-strip {
-      margin-top: 1.4rem;
-      font-size: 0.78rem;
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .hero-strip-label {
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      font-size: 0.7rem;
-      color: #6b7280;
-    }
-
-    .hero-strip-words {
-      overflow: hidden;
-      height: 1.1rem;
+    /* HERO VISUAL (animated mockup) */
+    .hero-visual {
       position: relative;
-      width: 210px;
+      height: 260px;
+      max-width: 420px;
+      margin-inline: auto;
     }
 
-    .hero-strip-words span {
+    .hero-orbit {
       position: absolute;
-      left: 0;
-      right: 0;
-      text-align: left;
-      animation: rotateWords 9s infinite;
-    }
-
-    .hero-strip-words span:nth-child(1) {
-      animation-delay: 0s;
-    }
-    .hero-strip-words span:nth-child(2) {
-      animation-delay: 3s;
-    }
-    .hero-strip-words span:nth-child(3) {
-      animation-delay: 6s;
-    }
-
-    @keyframes rotateWords {
-      0% {
-        transform: translateY(0);
-        opacity: 1;
-      }
-      25% {
-        transform: translateY(0);
-        opacity: 1;
-      }
-      33% {
-        transform: translateY(-100%);
-        opacity: 0;
-      }
-      100% {
-        transform: translateY(-100%);
-        opacity: 0;
-      }
-    }
-
-    /* HERO CARD */
-    .hero-card {
-      border-radius: var(--radius-xxl);
-      padding: 1.3rem 1.4rem 1.4rem;
+      inset: -20px;
+      border-radius: 999px;
       background:
-        linear-gradient(145deg, rgba(15, 23, 42, 0.96), rgba(2, 6, 23, 0.98));
+        conic-gradient(
+          from 180deg,
+          rgba(0, 198, 255, 0.2),
+          rgba(255, 75, 139, 0.22),
+          rgba(56, 189, 248, 0.16),
+          rgba(0, 198, 255, 0.2)
+        );
+      opacity: 0.6;
+      filter: blur(12px);
+      animation: spinOrbit 16s linear infinite;
+    }
+
+    @keyframes spinOrbit {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .hero-card-main {
+      position: absolute;
+      inset: 18px 26px;
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at top left, rgba(0, 198, 255, 0.32), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(255, 75, 139, 0.32), transparent 55%),
+        #020617;
+      border: 1px solid rgba(148, 163, 184, 0.35);
       box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(148, 163, 184, 0.28);
-      position: relative;
+      padding: 0.85rem 0.95rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       overflow: hidden;
     }
 
-    .hero-card::before {
-      content: "";
-      position: absolute;
-      width: 180%;
-      height: 180%;
-      background:
-        radial-gradient(circle at top right, rgba(0, 198, 255, 0.25), transparent 55%),
-        radial-gradient(circle at bottom left, rgba(255, 75, 139, 0.25), transparent 55%);
-      top: -40%;
-      left: -20%;
-      opacity: 0.85;
-      pointer-events: none;
-    }
-
-    .hero-card-inner {
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-tag {
-      font-size: 0.72rem;
-      color: var(--muted);
-      margin-bottom: 0.4rem;
-      display: inline-flex;
+    .hero-card-header {
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 0.4rem;
+      font-size: 0.75rem;
+      color: #e5e7eb;
+      margin-bottom: 0.4rem;
     }
 
-    .hero-tag span.dot {
+    .hero-card-header span.tag {
+      font-size: 0.7rem;
+      padding: 0.22rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(2, 6, 23, 0.92);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+    }
+
+    .hero-card-header span.live-dot {
       width: 8px;
       height: 8px;
       border-radius: 999px;
       background: #22c55e;
       box-shadow: 0 0 14px rgba(34, 197, 94, 0.9);
+      display: inline-block;
+      margin-right: 4px;
     }
 
-    .hero-card h2 {
-      font-size: 1.05rem;
-      margin-bottom: 0.7rem;
-    }
-
-    .mockup-window {
-      border-radius: 18px;
-      border: 1px solid rgba(15, 23, 42, 0.95);
-      background: rgba(15, 23, 42, 0.95);
-      padding: 0.5rem 0.55rem 0.6rem;
-      box-shadow: var(--shadow-card);
-      margin-bottom: 0.8rem;
-    }
-
-    .mockup-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 0.68rem;
-      color: var(--muted);
-      margin-bottom: 0.4rem;
-    }
-
-    .window-dots {
-      display: flex;
-      gap: 0.22rem;
-    }
-
-    .window-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: #4b5563;
-    }
-
-    .mockup-body {
+    .hero-card-body {
       display: grid;
-      grid-template-columns: 1.1fr 1fr;
+      grid-template-columns: 1.1fr 0.9fr;
       gap: 0.6rem;
-      font-size: 0.72rem;
-    }
-
-    .mockup-hero {
-      border-radius: 12px;
-      background:
-        radial-gradient(circle at top left, rgba(0, 198, 255, 0.38), transparent 60%),
-        radial-gradient(circle at bottom right, rgba(255, 75, 139, 0.38), transparent 60%);
-      padding: 0.7rem;
-      color: #0b1120;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .mockup-hero-title {
-      font-weight: 700;
-      font-size: 0.8rem;
-      margin-bottom: 0.15rem;
-    }
-
-    .mockup-hero-sub {
-      font-size: 0.7rem;
-    }
-
-    .mockup-pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.3rem;
-      margin-top: 0.45rem;
-    }
-
-    .mockup-pill {
-      font-size: 0.65rem;
-      padding: 0.13rem 0.5rem;
-      border-radius: 999px;
-      border: 1px solid rgba(15, 23, 42, 0.55);
-      background: rgba(248, 250, 252, 0.92);
-    }
-
-    .mockup-cta {
-      margin-top: 0.45rem;
-      display: inline-flex;
       align-items: center;
-      gap: 0.3rem;
-      font-size: 0.7rem;
-      padding: 0.2rem 0.6rem;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.85);
+    }
+
+    .hero-card-copy {
+      font-size: 0.78rem;
       color: #e5e7eb;
     }
 
-    .mockup-sidebar {
-      border-radius: 12px;
-      border: 1px dashed rgba(148, 163, 184, 0.5);
-      padding: 0.5rem;
-      background: rgba(15, 23, 42, 0.86);
-      display: grid;
-      gap: 0.35rem;
+    .hero-card-copy h2 {
+      font-size: 0.9rem;
+      margin-bottom: 0.3rem;
     }
 
-    .mockup-row {
+    .hero-card-copy p {
+      font-size: 0.72rem;
+      color: #e5e7eb;
+    }
+
+    .hero-card-copy .mini-bullets {
+      margin-top: 0.45rem;
+      display: grid;
+      gap: 0.2rem;
+      font-size: 0.7rem;
+    }
+
+    .hero-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      font-size: 0.68rem;
+      margin-top: 0.45rem;
+    }
+
+    .hero-metrics-card {
+      border-radius: 16px;
+      background: rgba(2, 6, 23, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      padding: 0.55rem 0.6rem;
+      font-size: 0.7rem;
+      color: var(--muted);
+      display: grid;
+      gap: 0.25rem;
+      animation: floatCard 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatCard {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-8px); }
+    }
+
+    .hero-metric-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 0.7rem;
-      color: var(--muted);
     }
 
-    .badge {
+    .hero-metric-row span.value {
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    .hero-badge-bottom {
+      margin-top: 0.4rem;
       display: inline-flex;
       align-items: center;
       gap: 0.35rem;
-      padding: 0.3rem 0.7rem;
+      font-size: 0.68rem;
+      color: #e5e7eb;
+      padding: 0.18rem 0.6rem;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.4);
       background: rgba(15, 23, 42, 0.96);
-      font-size: 0.74rem;
-      margin-top: 0.6rem;
+      border: 1px dashed rgba(148, 163, 184, 0.5);
     }
 
-    .badge span.spark {
-      font-size: 0.9rem;
-    }
-
-    /* SECTION */
+    /* SECTIONS */
     section {
       padding: 2rem 0 2.3rem;
     }
@@ -689,7 +579,7 @@
       width: 32px;
       height: 32px;
       border-radius: 999px;
-      background: var(--accent-soft);
+      background: rgba(0, 198, 255, 0.14);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -713,6 +603,50 @@
       color: var(--accent);
     }
 
+    /* ABOUT + WHY CHOOSE US */
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 1.6rem;
+    }
+
+    .about-card,
+    .why-card {
+      background: var(--card);
+      border-radius: var(--radius-xl);
+      padding: 1.1rem 1.1rem 1.2rem;
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      box-shadow: var(--shadow-card);
+    }
+
+    .about-card h3,
+    .why-card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .about-card p,
+    .why-card p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+
+    .about-list,
+    .why-list {
+      list-style: none;
+      font-size: 0.8rem;
+      color: #e5e7eb;
+      display: grid;
+      gap: 0.3rem;
+    }
+
+    .about-list li::before,
+    .why-list li::before {
+      content: "• ";
+      color: var(--accent);
+    }
+
     /* PORTFOLIO */
     .portfolio-grid {
       display: grid;
@@ -723,7 +657,6 @@
     .project-card {
       background: radial-gradient(circle at top, #020617, #020617 45%, #000000);
       border-radius: var(--radius-xl);
-      padding: 0.9rem 0.95rem 0.95rem;
       border: 1px solid rgba(31, 41, 55, 0.96);
       position: relative;
       overflow: hidden;
@@ -732,32 +665,35 @@
         box-shadow 0.18s ease,
         border-color 0.18s ease,
         background 0.18s ease;
+      display: flex;
+      flex-direction: column;
     }
 
     .project-card:hover {
       transform: translateY(-4px) scale(1.01);
       box-shadow: var(--shadow-card);
       border-color: var(--accent);
-      background: radial-gradient(circle at top, #020617, #020617 35%, #020617);
     }
 
     .project-thumb {
-      border-radius: 12px;
+      width: 100%;
+      aspect-ratio: 4 / 3;
       overflow: hidden;
-      margin-bottom: 0.6rem;
-      border: 1px solid rgba(15, 23, 42, 0.9);
     }
 
     .project-thumb img {
       width: 100%;
-      height: 150px;
+      height: 100%;
       object-fit: cover;
-      display: block;
-      transition: transform 0.2s ease;
+      transition: transform 0.3s ease;
     }
 
     .project-card:hover .project-thumb img {
-      transform: scale(1.03);
+      transform: scale(1.04);
+    }
+
+    .project-content {
+      padding: 0.75rem 0.9rem 0.9rem;
     }
 
     .project-topline {
@@ -765,7 +701,7 @@
       justify-content: space-between;
       align-items: center;
       gap: 0.5rem;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.35rem;
     }
 
     .project-name {
@@ -781,7 +717,7 @@
     .project-url {
       font-size: 0.78rem;
       color: var(--muted);
-      margin-bottom: 0.55rem;
+      margin-bottom: 0.45rem;
       word-break: break-all;
     }
 
@@ -1003,128 +939,61 @@
       color: var(--accent);
     }
 
-    /* FLOATING SMS CHAT WIDGET */
-    .chat-widget {
+    /* FLOATING CHAT (SMS) */
+    .chat-fab {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
+      right: 1.4rem;
+      bottom: 1.5rem;
       z-index: 50;
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      gap: 0.6rem;
+      gap: 0.5rem;
       font-size: 0.8rem;
     }
 
     .chat-bubble {
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.98);
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      color: var(--muted);
+      max-width: 220px;
+    }
+
+    .chat-bubble strong {
+      color: #e5e7eb;
+    }
+
+    .chat-button {
       width: 52px;
       height: 52px;
       border-radius: 999px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      box-shadow:
-        0 16px 40px rgba(0, 0, 0, 0.9),
-        0 0 24px rgba(0, 198, 255, 0.8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      color: #020617;
-      font-size: 1.2rem;
-    }
-
-    .chat-label {
-      background: rgba(15, 23, 42, 0.96);
-      border-radius: 999px;
-      padding: 0.35rem 0.8rem;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      color: var(--muted);
-      backdrop-filter: blur(8px);
-    }
-
-    .chat-panel {
-      width: 260px;
-      background: rgba(15, 23, 42, 0.98);
-      border-radius: 16px;
-      border: 1px solid rgba(148, 163, 184, 0.45);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95);
-      overflow: hidden;
-      display: none;
-      flex-direction: column;
-    }
-
-    .chat-panel-header {
-      padding: 0.6rem 0.8rem;
-      background: radial-gradient(circle at top, #00c6ff33, transparent 60%);
-      border-bottom: 1px solid rgba(31, 41, 55, 0.9);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.8rem;
-    }
-
-    .chat-panel-header span.title {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .chat-panel-header span.title strong {
-      font-size: 0.82rem;
-    }
-
-    .chat-panel-header span.title small {
-      font-size: 0.7rem;
-      color: var(--muted);
-    }
-
-    .chat-close {
-      cursor: pointer;
-      font-size: 1rem;
-      color: var(--muted);
-    }
-
-    .chat-panel-body {
-      padding: 0.7rem 0.8rem;
-      font-size: 0.78rem;
-      color: var(--muted);
-    }
-
-    .chat-input-area {
-      padding: 0.6rem 0.8rem 0.7rem;
-      border-top: 1px solid rgba(31, 41, 55, 0.9);
-      display: grid;
-      gap: 0.4rem;
-    }
-
-    .chat-input-area textarea {
-      min-height: 60px;
-      resize: vertical;
-      border-radius: 10px;
-      border: 1px solid rgba(31, 41, 55, 0.98);
-      padding: 0.45rem 0.55rem;
-      background: rgba(15, 23, 42, 0.96);
-      color: var(--text);
-      font-size: 0.8rem;
-      outline: none;
-    }
-
-    .chat-input-area button {
       border: none;
-      border-radius: 999px;
-      padding: 0.4rem 0.8rem;
-      font-size: 0.8rem;
-      cursor: pointer;
-      display: inline-flex;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.3rem;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color: #020617;
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.75);
+      box-shadow:
+        0 16px 36px rgba(0, 0, 0, 0.9),
+        0 0 24px rgba(0, 198, 255, 0.7);
+      cursor: pointer;
+      transition:
+        transform 0.16s ease,
+        box-shadow 0.16s ease,
+        filter 0.16s ease;
     }
 
-    .chat-input-hint {
-      font-size: 0.7rem;
-      color: #6b7280;
+    .chat-button span {
+      font-size: 1.4rem;
+    }
+
+    .chat-button:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow:
+        0 20px 42px rgba(0, 0, 0, 0.96),
+        0 0 28px rgba(0, 198, 255, 0.9);
+      filter: brightness(1.05);
     }
 
     /* RESPONSIVE */
@@ -1132,8 +1001,9 @@
       .hero-grid {
         grid-template-columns: minmax(0, 1fr);
       }
-      .hero-card {
-        order: -1;
+      .hero-visual {
+        max-width: 360px;
+        margin-top: 1.1rem;
       }
       .services-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1142,6 +1012,9 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
       .contact-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .about-grid {
         grid-template-columns: minmax(0, 1fr);
       }
       .nav-links {
@@ -1167,9 +1040,8 @@
       .nav {
         padding: 0.7rem 0;
       }
-      .chat-widget {
-        right: 12px;
-        bottom: 12px;
+      .chat-bubble {
+        display: none;
       }
     }
   </style>
@@ -1194,6 +1066,7 @@
         <div class="nav-right">
           <nav class="nav-links">
             <a href="#services">Services</a>
+            <a href="#about">About</a>
             <a href="#portfolio">Our Work</a>
             <a href="#contact">Contact</a>
           </nav>
@@ -1214,9 +1087,6 @@
     <main>
       <!-- HERO -->
       <section class="hero" id="top">
-        <div class="hero-gradient"></div>
-        <div class="hero-overlay"></div>
-
         <div class="container hero-grid">
           <div>
             <div class="eyebrow">
@@ -1224,7 +1094,7 @@
               <span>Get a website that actually brings you customers.</span>
             </div>
             <h1>
-              Beautiful, <span class="highlight">high-converting</span> websites
+              High-converting <span class="highlight">websites & ads</span>
               for real small businesses.
             </h1>
             <p class="hero-subtitle">
@@ -1254,77 +1124,51 @@
                 <span>All 50 states (U.S.A.)</span>
               </div>
             </div>
-
-            <div class="hero-strip">
-              <span class="hero-strip-label">We build for</span>
-              <div class="hero-strip-words">
-                <span>tire shops & auto repair.</span>
-                <span>plumbers, installers & trades.</span>
-                <span>studios, marketers & creatives.</span>
-              </div>
-            </div>
           </div>
 
-          <aside class="hero-card" aria-label="Preview of your new site">
-            <div class="hero-card-inner">
-              <div class="hero-tag">
-                <span class="dot"></span>
-                <span>Live-style preview</span>
+          <!-- Animated hero visual -->
+          <aside class="hero-visual" aria-label="Engaging website mockup">
+            <div class="hero-orbit"></div>
+            <div class="hero-card-main">
+              <div class="hero-card-header">
+                <span>yourbusiness.com</span>
+                <span class="tag">
+                  <span class="live-dot"></span> Live demo
+                </span>
               </div>
-              <h2>What your customers see when they land on your site.</h2>
-
-              <div class="mockup-window">
-                <div class="mockup-header">
-                  <div class="window-dots">
-                    <span class="window-dot"></span>
-                    <span class="window-dot"></span>
-                    <span class="window-dot"></span>
+              <div class="hero-card-body">
+                <div class="hero-card-copy">
+                  <h2>“Found you on Google!”</h2>
+                  <p>
+                    Turn random clicks into booked jobs with a clean,
+                    high-converting website.
+                  </p>
+                  <div class="mini-bullets">
+                    <span>• Mobile-first design</span>
+                    <span>• Built for SEO + Google Ads</span>
+                    <span>• Click-to-call from every page</span>
                   </div>
-                  <span>yourbusiness.com</span>
-                </div>
-                <div class="mockup-body">
-                  <div class="mockup-hero">
-                    <div>
-                      <div class="mockup-hero-title">Need more customers?</div>
-                      <div class="mockup-hero-sub">
-                        Turn Google searches into phone calls and booked jobs.
-                      </div>
-                    </div>
-                    <div>
-                      <div class="mockup-pill-row">
-                        <div class="mockup-pill">Mobile friendly</div>
-                        <div class="mockup-pill">Loads fast</div>
-                        <div class="mockup-pill">SEO-ready</div>
-                      </div>
-                      <div class="mockup-cta">
-                        Get a free quote <span>↗</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="mockup-sidebar">
-                    <div class="mockup-row">
-                      <span>Website build</span>
-                      <span>Included ✅</span>
-                    </div>
-                    <div class="mockup-row">
-                      <span>SEO setup</span>
-                      <span>Included ✅</span>
-                    </div>
-                    <div class="mockup-row">
-                      <span>Google Ads ready</span>
-                      <span>Yes ⚡</span>
-                    </div>
-                    <div class="mockup-row">
-                      <span>Device support</span>
-                      <span>Phone • Tablet • Desktop</span>
-                    </div>
+                  <div class="hero-chip">
+                    ⚡ Next step: make your phone ring.
                   </div>
                 </div>
-              </div>
-
-              <div class="badge">
-                <span class="spark">🌟</span>
-                <span>We design with one goal: make your phone ring.</span>
+                <div class="hero-metrics-card">
+                  <div class="hero-metric-row">
+                    <span>Site speed</span>
+                    <span class="value">A+ score</span>
+                  </div>
+                  <div class="hero-metric-row">
+                    <span>Mobile ready</span>
+                    <span class="value">Yes 📱</span>
+                  </div>
+                  <div class="hero-metric-row">
+                    <span>Leads per month</span>
+                    <span class="value">↑ vs old site</span>
+                  </div>
+                  <div class="hero-badge-bottom">
+                    🧭 Built to send customers straight to your business.
+                  </div>
+                </div>
               </div>
             </div>
           </aside>
@@ -1387,6 +1231,51 @@
         </div>
       </section>
 
+      <!-- ABOUT + WHY CHOOSE US -->
+      <section id="about">
+        <div class="container">
+          <div class="section-header">
+            <h2>About Jay's Web Design</h2>
+            <p>
+              Real people, real businesses, real results. No agency fluff — just
+              websites that look good and actually perform.
+            </p>
+          </div>
+
+          <div class="about-grid">
+            <div class="about-card">
+              <h3>Who we are</h3>
+              <p>
+                Jay's Web Design is a small, hands-on web studio that works with
+                businesses all across the United States — from local shops and
+                home services to online brands and creators.
+              </p>
+              <ul class="about-list">
+                <li>We speak normal people language, not tech jargon.</li>
+                <li>We care about results — calls, messages, and booked jobs.</li>
+                <li>We build sites that are easy for your customers to use.</li>
+                <li>We’re a message away if you need updates or tweaks.</li>
+              </ul>
+            </div>
+
+            <div class="why-card">
+              <h3>Why choose us?</h3>
+              <p>
+                You don't just need a “pretty website” — you need something that
+                helps your business grow. That’s our whole focus.
+              </p>
+              <ul class="why-list">
+                <li>Every site is built mobile-first and speed-optimized.</li>
+                <li>SEO and Google Ads in mind from day one.</li>
+                <li>Click-to-call, click-to-text, and clear calls-to-action.</li>
+                <li>Friendly, direct communication — no ticket system or bots.</li>
+                <li>We work with your budget and your timeline.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- PORTFOLIO -->
       <section id="portfolio">
         <div class="container">
@@ -1406,16 +1295,18 @@
               rel="noopener noreferrer"
             >
               <div class="project-thumb">
-                <img src="images/rushwheel.jpg" alt="Rush Wheel & Tire website screenshot" />
+                <img src="images/rushwheelandtire.jpg" alt="Rush Wheel & Tire website screenshot" />
               </div>
-              <div class="project-topline">
-                <span class="project-name">Rush Wheel & Tire</span>
-                <span class="project-tag">Automotive</span>
-              </div>
-              <div class="project-url">rushwheelandtire.com</div>
-              <div class="project-meta">
-                <span class="industry">Custom shop website</span>
-                <span class="cta">View site ↗</span>
+              <div class="project-content">
+                <div class="project-topline">
+                  <span class="project-name">Rush Wheel & Tire</span>
+                  <span class="project-tag">Automotive</span>
+                </div>
+                <div class="project-url">rushwheelandtire.com</div>
+                <div class="project-meta">
+                  <span class="industry">Custom shop website</span>
+                  <span class="cta">View site ↗</span>
+                </div>
               </div>
             </a>
 
@@ -1426,16 +1317,18 @@
               rel="noopener noreferrer"
             >
               <div class="project-thumb">
-                <img src="images/edwins.jpg" alt="Edwin's Repair Shop website screenshot" />
+                <img src="images/edwinsrepairshop.jpg" alt="Edwin's Repair Shop website screenshot" />
               </div>
-              <div class="project-topline">
-                <span class="project-name">Edwin's Repair Shop</span>
-                <span class="project-tag">Auto Repair</span>
-              </div>
-              <div class="project-url">edwinsrepairshop.com</div>
-              <div class="project-meta">
-                <span class="industry">Local services</span>
-                <span class="cta">View site ↗</span>
+              <div class="project-content">
+                <div class="project-topline">
+                  <span class="project-name">Edwin's Repair Shop</span>
+                  <span class="project-tag">Auto Repair</span>
+                </div>
+                <div class="project-url">edwinsrepairshop.com</div>
+                <div class="project-meta">
+                  <span class="industry">Local services</span>
+                  <span class="cta">View site ↗</span>
+                </div>
               </div>
             </a>
 
@@ -1446,16 +1339,18 @@
               rel="noopener noreferrer"
             >
               <div class="project-thumb">
-                <img src="images/plumbdaddy.jpg" alt="Plumb Daddy Texas website screenshot" />
+                <img src="images/plumbdaddy-texas.jpg" alt="Plumb Daddy Texas website screenshot" />
               </div>
-              <div class="project-topline">
-                <span class="project-name">Plumb Daddy Texas</span>
-                <span class="project-tag">Plumbing</span>
-              </div>
-              <div class="project-url">plumbdaddy-texas.com</div>
-              <div class="project-meta">
-                <span class="industry">Home services</span>
-                <span class="cta">View site ↗</span>
+              <div class="project-content">
+                <div class="project-topline">
+                  <span class="project-name">Plumb Daddy Texas</span>
+                  <span class="project-tag">Plumbing</span>
+                </div>
+                <div class="project-url">plumbdaddy-texas.com</div>
+                <div class="project-meta">
+                  <span class="industry">Home services</span>
+                  <span class="cta">View site ↗</span>
+                </div>
               </div>
             </a>
 
@@ -1468,14 +1363,16 @@
               <div class="project-thumb">
                 <img src="images/tattoomaze.jpg" alt="Tattoo Maze website screenshot" />
               </div>
-              <div class="project-topline">
-                <span class="project-name">Tattoo Maze</span>
-                <span class="project-tag">Creative</span>
-              </div>
-              <div class="project-url">tattoomaze.com</div>
-              <div class="project-meta">
-                <span class="industry">Art & studio</span>
-                <span class="cta">View site ↗</span>
+              <div class="project-content">
+                <div class="project-topline">
+                  <span class="project-name">Tattoo Maze</span>
+                  <span class="project-tag">Creative</span>
+                </div>
+                <div class="project-url">tattoomaze.com</div>
+                <div class="project-meta">
+                  <span class="industry">Art & studio</span>
+                  <span class="cta">View site ↗</span>
+                </div>
               </div>
             </a>
 
@@ -1488,14 +1385,16 @@
               <div class="project-thumb">
                 <img src="images/rginstallation.jpg" alt="RG Installation website screenshot" />
               </div>
-              <div class="project-topline">
-                <span class="project-name">RG Installation</span>
-                <span class="project-tag">Construction</span>
-              </div>
-              <div class="project-url">rginstallation.org</div>
-              <div class="project-meta">
-                <span class="industry">Trades & install</span>
-                <span class="cta">View site ↗</span>
+              <div class="project-content">
+                <div class="project-topline">
+                  <span class="project-name">RG Installation</span>
+                  <span class="project-tag">Construction</span>
+                </div>
+                <div class="project-url">rginstallation.org</div>
+                <div class="project-meta">
+                  <span class="industry">Trades & install</span>
+                  <span class="cta">View site ↗</span>
+                </div>
               </div>
             </a>
 
@@ -1506,16 +1405,18 @@
               rel="noopener noreferrer"
             >
               <div class="project-thumb">
-                <img src="images/socialplug.jpg" alt="Social Plug Media website screenshot" />
+                <img src="images/socialplugmedia.jpg" alt="Social Plug Media website screenshot" />
               </div>
-              <div class="project-topline">
-                <span class="project-name">Social Plug Media</span>
-                <span class="project-tag">Marketing</span>
-              </div>
-              <div class="project-url">socialplugmedia.net</div>
-              <div class="project-meta">
-                <span class="industry">Digital marketing</span>
-                <span class="cta">View site ↗</span>
+              <div class="project-content">
+                <div class="project-topline">
+                  <span class="project-name">Social Plug Media</span>
+                  <span class="project-tag">Marketing</span>
+                </div>
+                <div class="project-url">socialplugmedia.net</div>
+                <div class="project-meta">
+                  <span class="industry">Digital marketing</span>
+                  <span class="cta">View site ↗</span>
+                </div>
               </div>
             </a>
           </div>
@@ -1551,7 +1452,7 @@
                   <div class="contact-pill">Bundles available</div>
                 </div>
 
-                <!-- CONTACT FORM -->
+                <!-- CONTACT FORM (FormSubmit) -->
                 <form
                   action="https://formsubmit.co/bluebisonwebdesign@gmail.com"
                   method="POST"
@@ -1688,63 +1589,23 @@
     </footer>
 
     <!-- Floating SMS chat -->
-    <div class="chat-widget">
-      <div class="chat-panel" id="chatPanel">
-        <div class="chat-panel-header">
-          <span class="title">
-            <strong>Chat with Jay's Web Design</strong>
-            <small>Replies by SMS to your phone</small>
-          </span>
-          <span class="chat-close" id="chatClose">✕</span>
-        </div>
-        <div class="chat-panel-body">
-          <p>Send us a quick message and we’ll text you back as soon as possible.</p>
-        </div>
-        <div class="chat-input-area">
-          <textarea
-            id="chatMessage"
-            placeholder="Type your message here..."
-          ></textarea>
-          <button id="chatSend">
-            📲 Send via SMS
-          </button>
-          <div class="chat-input-hint">
-            Opens your SMS app and sends to <strong>(830) 290-5856</strong>.
-          </div>
-        </div>
+    <div class="chat-fab">
+      <div class="chat-bubble">
+        Have a quick question? <strong>Text us</strong> and we’ll reply as soon
+        as we can.
       </div>
-
-      <div class="chat-label">Questions? Text us.</div>
-      <div class="chat-bubble" id="chatBubble" title="Chat via text">
-        💬
-      </div>
+      <button
+        class="chat-button"
+        onclick="window.location.href='sms:18302905856?&body=Hi%20Jay%27s%20Web%20Design%2C%20I%27m%20interested%20in%20a%20website.'"
+        aria-label="Chat with Jay's Web Design via SMS"
+      >
+        <span>💬</span>
+      </button>
     </div>
   </div>
 
   <script>
-    // Footer year
     document.getElementById("year").textContent = new Date().getFullYear();
-
-    // Simple SMS chat widget behavior
-    const chatBubble = document.getElementById("chatBubble");
-    const chatPanel = document.getElementById("chatPanel");
-    const chatClose = document.getElementById("chatClose");
-    const chatSend = document.getElementById("chatSend");
-    const chatMessage = document.getElementById("chatMessage");
-
-    chatBubble.addEventListener("click", () => {
-      chatPanel.style.display = chatPanel.style.display === "flex" ? "none" : "flex";
-    });
-
-    chatClose.addEventListener("click", () => {
-      chatPanel.style.display = "none";
-    });
-
-    chatSend.addEventListener("click", () => {
-      const message = encodeURIComponent(chatMessage.value || "");
-      // This opens SMS to your number with the message pre-filled
-      window.location.href = "sms:+18302905856?&body=" + message;
-    });
   </script>
 </body>
 </html>
